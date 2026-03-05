@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 const VERSIONS = {
   java: ["17", "21", "25"],
   kotlin: ["2.2.21", "2.1.0"],
+  /** Fallback when Paper API is unavailable */
   paper: [
     "1.21.11-R0.1-SNAPSHOT",
     "1.21.4-R0.1-SNAPSHOT",
@@ -79,6 +80,7 @@ export function Wizard() {
   const [pluginAuthors, setPluginAuthors] = useState("YourName");
   const [pluginDescription, setPluginDescription] = useState("");
   const [pluginWebsite, setPluginWebsite] = useState("");
+  const [paperVersions, setPaperVersions] = useState<string[]>(VERSIONS.paper);
   const [preview, setPreview] = useState({
     projectName: "my-plugin",
     groupId: "com.example",
@@ -104,6 +106,17 @@ export function Wizard() {
   useEffect(() => {
     syncPreview(formRef.current);
   }, [projectType, syncPreview]);
+
+  useEffect(() => {
+    fetch("/api/paper-versions")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((versions: string[]) => {
+        if (Array.isArray(versions) && versions.length > 0) {
+          setPaperVersions(versions);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const toggleDependency = (id: string, scope?: "provided" | "bundled") => {
     setSelectedDependencies((prev) => {
@@ -507,7 +520,7 @@ export function Wizard() {
                     name="paperVersion"
                     defaultValue="1.21.11-R0.1-SNAPSHOT"
                   >
-                    {VERSIONS.paper.map((v) => (
+                    {paperVersions.map((v) => (
                       <option key={v} value={v}>
                         {v}
                       </option>

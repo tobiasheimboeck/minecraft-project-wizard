@@ -8,7 +8,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--kotlin-purple)] text-white border-[var(--kotlin-purple)] hover:bg-[var(--kotlin-purple-hover)] hover:border-[var(--kotlin-purple-hover)]",
+          "bg-[var(--kotlin-purple)] text-[#1a1a1a] border-[var(--kotlin-purple)] hover:bg-[var(--kotlin-purple-hover)] hover:border-[var(--kotlin-purple-hover)]",
         outline:
           "border-border bg-card hover:bg-muted hover:text-foreground text-foreground",
         ghost: "border-transparent hover:bg-muted text-foreground",
