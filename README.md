@@ -56,7 +56,6 @@ npm run start
 ```bash
 cd deploy
 ./setup-server.sh
-# .env anpassen falls nötig (DOMAIN)
 docker compose up -d
 ```
 
