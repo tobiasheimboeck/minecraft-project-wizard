@@ -1,0 +1,18 @@
+{
+  "name": "wizard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/generate-templates.js && vite",
+    "build": "node scripts/generate-templates.js && vite build",
+    "preview": "vite preview",
+    "generate-templates": "node scripts/generate-templates.js"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}

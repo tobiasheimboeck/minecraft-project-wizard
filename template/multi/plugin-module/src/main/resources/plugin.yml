@@ -1,0 +1,6 @@
+name: {{PROJECT_NAME_CAMEL}}
+version: '1.0-SNAPSHOT'
+main: {{GROUP_ID}}.bukkit.{{PROJECT_NAME_CAMEL}}Plugin
+api-version: "{{PAPER_API_VERSION}}"
+authors:
+  - YourName

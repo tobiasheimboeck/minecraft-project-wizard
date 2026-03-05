@@ -1,0 +1,6 @@
+[versions]
+java = "{{JAVA_VERSION}}"
+paper-api = "{{PAPER_VERSION}}"
+
+[libraries]
+paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper-api" }

@@ -1,0 +1,8 @@
+[versions]
+java = "{{JAVA_VERSION}}"
+kotlinx-serialization-json = "1.9.0"
+paper-api = "{{PAPER_VERSION}}"
+
+[libraries]
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+paper-api = { group = "io.papermc.paper", name = "paper-api", version.ref = "paper-api" }
