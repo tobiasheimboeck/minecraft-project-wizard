@@ -48,7 +48,7 @@ npm run start
 
 ### GitHub Actions (CI/CD)
 
-- Push auf `production`-Branch → automatischer Build & Push nach `ghcr.io`
+- Push auf `main`-Branch → automatischer Build & Push nach `ghcr.io`
 - Image: `ghcr.io/<owner>/minecraft-projekt-wirard:latest`
 
 ### Server-Setup
