@@ -7,12 +7,12 @@ alwaysApply: true
 # Wizard Design – 1:1 Preservation
 
 ## CRITICAL
-The wizard design MUST stay consistent (dark theme, Kotlin purple). Do not change:
-- **Colors**: --kotlin-purple (#7f52ff), --kotlin-purple-hover (#9370ff), --wizard-bg (#1e1e1e), --wizard-bg-elevated (#252526), --wizard-border (#3d3d3d)
+The wizard design MUST stay consistent (dark theme, gold accent). Do not change:
+- **Colors**: --kotlin-purple (#f0c45a), --kotlin-purple-hover (#f5d078), --wizard-bg (#1e1e1e), --wizard-bg-elevated (#252526), --wizard-border (#3d3d3d)
 - **Font**: JetBrains Mono (font-mono)
 - **Layout**: Two-column (config left, sidebar right), footer with GitHub link + Generate button
-- **Option chips**: Inline radio-style chips with purple highlight when selected
-- **Form fields**: Uppercase labels, bordered inputs, Kotlin purple focus ring
+- **Option chips**: Inline radio-style chips with gold highlight when selected
+- **Form fields**: Uppercase labels, bordered inputs, gold focus ring
 
 ## Sections (in order)
 1. Project (Single / Multi-Module)

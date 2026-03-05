@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import JSZip from "jszip";
-import { Github, Package, FileCode, FileText } from "lucide-react";
+import { Package, FileCode, FileText } from "lucide-react";
 import { singleTemplates, multiTemplates } from "@/lib/templates";
 import { DEPENDENCIES, GITHUB_AUTH_DEP_IDS } from "@/lib/dependencies";
 import { depIdToVarKey } from "@/lib/wizard-utils";
@@ -19,8 +19,6 @@ import {
   filterTemplatesBySourceLang,
 } from "@/lib/wizard-utils";
 import { cn } from "@/lib/utils";
-
-const GITHUB_REPO = "https://github.com/tobiasheimboeck/minecraft-project-wizard";
 
 const VERSIONS = {
   java: ["17", "21", "25"],
@@ -209,10 +207,10 @@ export function Wizard() {
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       <header className="mb-10 text-center">
         <h1 className="text-[1.75rem] font-semibold text-foreground mb-2">
-          Paper Plugin Generator
+          Minecraft Plugin Generator
         </h1>
         <p className="text-muted-foreground text-sm">
-          Generate a Paper plugin project – Java or Kotlin, single or multi-module
+          Generate a Minecraft plugin project – Java or Kotlin, single or multi-module
         </p>
       </header>
 
@@ -237,7 +235,7 @@ export function Wizard() {
                     className={cn(
                       "inline-flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] border cursor-pointer transition-colors",
                       projectType === value
-                        ? "border-[var(--kotlin-purple)] bg-[rgba(127,82,255,0.15)] text-[var(--kotlin-purple)]"
+                        ? "border-[var(--kotlin-purple)] bg-[rgba(240,196,90,0.15)] text-[var(--kotlin-purple)]"
                         : "border-border bg-card text-foreground hover:border-[#555] hover:bg-[#2d2d2d]"
                     )}
                   >
@@ -266,7 +264,7 @@ export function Wizard() {
                     className={cn(
                       "inline-flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] border cursor-pointer transition-colors",
                       sourceLang === value
-                        ? "border-[var(--kotlin-purple)] bg-[rgba(127,82,255,0.15)] text-[var(--kotlin-purple)]"
+                        ? "border-[var(--kotlin-purple)] bg-[rgba(240,196,90,0.15)] text-[var(--kotlin-purple)]"
                         : "border-border bg-card text-foreground hover:border-[#555] hover:bg-[#2d2d2d]"
                     )}
                   >
@@ -374,7 +372,7 @@ export function Wizard() {
                       const dep = DEPENDENCIES.find((d) => d.id === id);
                       return dep ? (
                         <li key={id}>
-                          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-[rgba(127,82,255,0.15)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)] rounded">
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-[rgba(240,196,90,0.15)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)] rounded">
                             {dep.name}
                             <span className="text-muted-foreground/80">
                               ({scope === "provided" ? "Provided" : "Bundled"})
@@ -467,7 +465,7 @@ export function Wizard() {
                     className={cn(
                       "inline-flex items-center gap-2 px-3 py-1.5 text-[0.8125rem] border cursor-pointer transition-colors",
                       "border-border bg-card text-foreground hover:border-[#555] hover:bg-[#2d2d2d]",
-                      "has-[:checked]:border-[var(--kotlin-purple)] has-[:checked]:bg-[rgba(127,82,255,0.15)] has-[:checked]:text-[var(--kotlin-purple)]"
+                      "has-[:checked]:border-[var(--kotlin-purple)] has-[:checked]:bg-[rgba(240,196,90,0.15)] has-[:checked]:text-[var(--kotlin-purple)]"
                     )}
                   >
                     <input
@@ -685,20 +683,11 @@ export function Wizard() {
         </aside>
       </div>
 
-      <footer className="flex items-center justify-between mt-auto pt-8 border-t border-border">
-        <a
-          href={GITHUB_REPO}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center p-2 text-muted-foreground hover:text-foreground transition-colors"
-          title="View on GitHub"
-        >
-          <Github className="size-6" />
-        </a>
+      <div className="mt-auto pt-8 flex justify-end">
         <Button type="submit" form="wizard-form">
           Generate
         </Button>
-      </footer>
+      </div>
 
       <DependenciesModal
         open={dependenciesModalOpen}

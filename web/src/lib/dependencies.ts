@@ -109,6 +109,36 @@ export const DEPENDENCIES: Dependency[] = [
     githubUrl: "https://github.com/DeveloperTobi-Server/entity-library",
     requiresGithubAuth: true,
   },
+  {
+    id: "hikaricp",
+    name: "HikariCP",
+    description: "High-performance JDBC connection pool. Often used with Exposed for database access.",
+    category: "DATABASE",
+    repoUrl: "",
+    repoBlock: "",
+    coordinates: "com.zaxxer:HikariCP:5.1.0",
+    githubUrl: "https://github.com/brettwooldridge/HikariCP",
+  },
+  {
+    id: "sqlite-jdbc",
+    name: "SQLite JDBC",
+    description: "JDBC driver for SQLite. Lightweight file-based database for local storage.",
+    category: "DATABASE",
+    repoUrl: "",
+    repoBlock: "",
+    coordinates: "org.xerial:sqlite-jdbc:3.46.0.0",
+    githubUrl: "https://github.com/xerial/sqlite-jdbc",
+  },
+  {
+    id: "mariadb-jdbc",
+    name: "MariaDB Connector/J",
+    description: "JDBC driver for MariaDB and MySQL. For remote database connections.",
+    category: "DATABASE",
+    repoUrl: "",
+    repoBlock: "",
+    coordinates: "org.mariadb.jdbc:mariadb-java-client:3.4.3",
+    githubUrl: "https://github.com/mariadb-corporation/mariadb-connector-j",
+  },
 ];
 
 export const GITHUB_AUTH_DEP_IDS = ["mclib", "inventory-library", "entity-library"];

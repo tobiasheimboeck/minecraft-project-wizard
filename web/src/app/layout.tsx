@@ -9,9 +9,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Paper Plugin Generator",
+  title: "Minecraft Plugin Generator",
   description:
-    "Generate a Paper plugin project – Java or Kotlin, single or multi-module",
+    "Generate a Minecraft plugin project – Java or Kotlin, single or multi-module",
 };
 
 export default function RootLayout({

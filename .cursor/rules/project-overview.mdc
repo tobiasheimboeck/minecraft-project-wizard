@@ -28,6 +28,6 @@ alwaysApply: true
 - Lucide React for icons
 
 ## Design Reference
-- **Theme**: KMP JetBrains style (kmp.jetbrains.com) – dark theme, Kotlin purple (#7f52ff)
+- **Theme**: KMP JetBrains style (kmp.jetbrains.com) – dark theme, gold accent (#f0c45a)
 - **Font**: JetBrains Mono
-- **Colors**: #1e1e1e background, #252526 elevated, #7f52ff primary
+- **Colors**: #1e1e1e background, #252526 elevated, #f0c45a primary

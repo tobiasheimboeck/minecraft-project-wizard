@@ -54,6 +54,24 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:1.0.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0")
 {{/DEP_EXPOSED_IMPLEMENTATION}}
+{{#DEP_HIKARICP_COMPILEONLY}}
+    compileOnly("com.zaxxer:HikariCP:5.1.0")
+{{/DEP_HIKARICP_COMPILEONLY}}
+{{#DEP_HIKARICP_IMPLEMENTATION}}
+    implementation("com.zaxxer:HikariCP:5.1.0")
+{{/DEP_HIKARICP_IMPLEMENTATION}}
+{{#DEP_SQLITE_JDBC_COMPILEONLY}}
+    compileOnly("org.xerial:sqlite-jdbc:3.46.0.0")
+{{/DEP_SQLITE_JDBC_COMPILEONLY}}
+{{#DEP_SQLITE_JDBC_IMPLEMENTATION}}
+    implementation("org.xerial:sqlite-jdbc:3.46.0.0")
+{{/DEP_SQLITE_JDBC_IMPLEMENTATION}}
+{{#DEP_MARIADB_JDBC_COMPILEONLY}}
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.4.3")
+{{/DEP_MARIADB_JDBC_COMPILEONLY}}
+{{#DEP_MARIADB_JDBC_IMPLEMENTATION}}
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.4.3")
+{{/DEP_MARIADB_JDBC_IMPLEMENTATION}}
 }
 
 tasks.shadowJar {
@@ -130,6 +148,24 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-dao:1.0.0")
     implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0")
 {{/DEP_EXPOSED_IMPLEMENTATION}}
+{{#DEP_HIKARICP_COMPILEONLY}}
+    compileOnly("com.zaxxer:HikariCP:5.1.0")
+{{/DEP_HIKARICP_COMPILEONLY}}
+{{#DEP_HIKARICP_IMPLEMENTATION}}
+    implementation("com.zaxxer:HikariCP:5.1.0")
+{{/DEP_HIKARICP_IMPLEMENTATION}}
+{{#DEP_SQLITE_JDBC_COMPILEONLY}}
+    compileOnly("org.xerial:sqlite-jdbc:3.46.0.0")
+{{/DEP_SQLITE_JDBC_COMPILEONLY}}
+{{#DEP_SQLITE_JDBC_IMPLEMENTATION}}
+    implementation("org.xerial:sqlite-jdbc:3.46.0.0")
+{{/DEP_SQLITE_JDBC_IMPLEMENTATION}}
+{{#DEP_MARIADB_JDBC_COMPILEONLY}}
+    compileOnly("org.mariadb.jdbc:mariadb-java-client:3.4.3")
+{{/DEP_MARIADB_JDBC_COMPILEONLY}}
+{{#DEP_MARIADB_JDBC_IMPLEMENTATION}}
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.4.3")
+{{/DEP_MARIADB_JDBC_IMPLEMENTATION}}
 }
 
 tasks.shadowJar {
