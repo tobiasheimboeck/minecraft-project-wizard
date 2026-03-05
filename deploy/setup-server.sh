@@ -26,7 +26,7 @@ cat > docker-compose.yml << 'EOF'
 services:
   web:
     # Standard: Image von GHCR pullen
-    image: ghcr.io/tobiasheimboeck/minecraft-projekt-wirard:${WEB_TAG:-latest}
+    image: ghcr.io/tobiasheimboeck/minecraft-project-wizard:${WEB_TAG:-latest}
     restart: unless-stopped
     pull_policy: always
     # Für lokalen Build: Kommentiere die image-Zeile aus und entferne Kommentar bei build:
