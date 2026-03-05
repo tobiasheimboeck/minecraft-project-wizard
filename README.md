@@ -2,6 +2,8 @@
 
 A wizard (similar to [start.spring.io](https://start.spring.io)) to generate Paper/Kotlin plugin projects – single or multi-module.
 
+**GitHub:** [github.com/tobiasheimboeck/minecraft-project-wizard](https://github.com/tobiasheimboeck/minecraft-project-wizard)
+
 ## Quick Start
 
 ```bash

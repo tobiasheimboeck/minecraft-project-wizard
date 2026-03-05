@@ -1,7 +1,7 @@
 import { singleTemplates, multiTemplates } from './templates.js';
 import JSZip from 'jszip';
 
-const GITHUB_REPO = 'https://github.com/DeveloperTobi/mc-lib';
+const GITHUB_REPO = 'https://github.com/tobiasheimboeck/minecraft-project-wizard';
 
 const GITHUB_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>`;
 
@@ -26,16 +26,30 @@ function replacePlaceholders(text, vars) {
 }
 
 function processConditionalBlocks(text, vars) {
+  let result = text;
   if (!vars.GITHUB_PUBLISH || vars.GITHUB_PUBLISH !== 'true') {
-    return text.replace(/\{\{#GITHUB_PUBLISH\}\}[\s\S]*?\{\{\/GITHUB_PUBLISH\}\}/g, '');
+    result = result.replace(/\{\{#GITHUB_PUBLISH\}\}[\s\S]*?\{\{\/GITHUB_PUBLISH\}\}/g, '');
+  } else {
+    result = result.replace(/\{\{#GITHUB_PUBLISH\}\}/g, '').replace(/\{\{\/GITHUB_PUBLISH\}\}/g, '');
   }
-  return text.replace(/\{\{#GITHUB_PUBLISH\}\}/g, '').replace(/\{\{\/GITHUB_PUBLISH\}\}/g, '');
+  const isKotlin = vars.SOURCE_LANG === 'kotlin';
+  result = result.replace(/\{\{#SOURCE_KOTLIN\}\}[\s\S]*?\{\{\/SOURCE_KOTLIN\}\}/g, isKotlin ? (m) => m.replace(/\{\{#SOURCE_KOTLIN\}\}|\{\{\/SOURCE_KOTLIN\}\}/g, '') : '');
+  result = result.replace(/\{\{#SOURCE_JAVA\}\}[\s\S]*?\{\{\/SOURCE_JAVA\}\}/g, !isKotlin ? (m) => m.replace(/\{\{#SOURCE_JAVA\}\}|\{\{\/SOURCE_JAVA\}\}/g, '') : '');
+  return result;
+}
+
+function filterTemplatesBySourceLang(templates, sourceLang) {
+  const excludeDir = sourceLang === 'kotlin' ? '/java/' : '/kotlin/';
+  return Object.fromEntries(
+    Object.entries(templates).filter(([path]) => !path.includes(excludeDir))
+  );
 }
 
 function generateZip(vars, templates) {
+  const filteredTemplates = filterTemplatesBySourceLang(templates, vars.SOURCE_LANG);
   const zip = new JSZip();
   const BINARY_PREFIX = '__BINARY_BASE64__';
-  for (const [filePath, content] of Object.entries(templates)) {
+  for (const [filePath, content] of Object.entries(filteredTemplates)) {
     const resolvedPath = replacePlaceholders(filePath, vars);
     if (typeof content === 'string' && content.startsWith(BINARY_PREFIX)) {
       const base64 = content.slice(BINARY_PREFIX.length);
@@ -49,6 +63,7 @@ function generateZip(vars, templates) {
   }
   return zip;
 }
+
 
 function downloadZip(zip, filename) {
   zip.generateAsync({ type: 'blob' }).then((blob) => {
@@ -67,7 +82,7 @@ export function initApp() {
     <div class="wizard">
       <header class="header">
         <h1>Paper Plugin Generator</h1>
-        <p>Generate a Kotlin Paper plugin project – single or multi-module</p>
+        <p>Generate a Paper plugin project – Java or Kotlin, single or multi-module</p>
       </header>
 
       <div class="main">
@@ -79,6 +94,15 @@ export function initApp() {
                 <label><input type="radio" name="projectType" value="single" checked> Single</label>
                 <label><input type="radio" name="projectType" value="multi"> Multi-Module</label>
               </div>
+            </section>
+
+            <section class="section">
+              <h2>Source Language</h2>
+              <div class="option-group">
+                <label><input type="radio" name="sourceLang" value="kotlin" checked> Kotlin</label>
+                <label><input type="radio" name="sourceLang" value="java"> Java</label>
+              </div>
+              <p class="hint">Gradle build files (.kts) stay Kotlin DSL in both cases.</p>
             </section>
 
             <section class="section">
@@ -125,7 +149,7 @@ export function initApp() {
             <section class="section">
               <h2>Versions</h2>
               <div class="project-metadata">
-                <div class="field">
+                <div id="kotlin-version-field" class="field">
                   <label for="kotlinVersion">Kotlin</label>
                   <select id="kotlinVersion" name="kotlinVersion">
                     ${VERSIONS.kotlin.map((v) => `<option value="${v}" ${v === '2.2.21' ? 'selected' : ''}>${v}</option>`).join('')}
@@ -156,7 +180,7 @@ export function initApp() {
 
         <aside class="sidebar">
           <h3 class="sidebar-title">Output</h3>
-          <p>Generates a Gradle project with Kotlin DSL, Paper API, and shadow plugin. Single-module or API + Plugin split.</p>
+          <p>Generates a Gradle project (build files always Kotlin DSL), Paper API, and shadow plugin. Choose Java or Kotlin for source code. Single-module or API + Plugin split.</p>
         </aside>
       </div>
 
@@ -173,13 +197,24 @@ export function initApp() {
   const githubSection = document.getElementById('github-section');
   const githubOwnerField = document.getElementById('github-owner-field');
 
+  const kotlinVersionField = document.getElementById('kotlin-version-field');
+  const sourceLangRadios = form.querySelectorAll('input[name="sourceLang"]');
+
+  function updateUi() {
+    const isMulti = form.querySelector('input[name="projectType"]:checked').value === 'multi';
+    const isKotlin = form.querySelector('input[name="sourceLang"]:checked').value === 'kotlin';
+    modulesSection.classList.toggle('hidden', !isMulti);
+    githubSection.classList.toggle('hidden', !isMulti);
+    kotlinVersionField.classList.toggle('hidden', !isKotlin);
+  }
+
   projectTypeRadios.forEach((radio) => {
-    radio.addEventListener('change', () => {
-      const isMulti = form.querySelector('input[name="projectType"]:checked').value === 'multi';
-      modulesSection.classList.toggle('hidden', !isMulti);
-      githubSection.classList.toggle('hidden', !isMulti);
-    });
+    radio.addEventListener('change', updateUi);
   });
+  sourceLangRadios.forEach((radio) => {
+    radio.addEventListener('change', updateUi);
+  });
+  updateUi();
 
   document.getElementById('githubPublish').addEventListener('change', (e) => {
     githubOwnerField.classList.toggle('hidden', !e.target.checked);
@@ -200,6 +235,7 @@ export function initApp() {
     const paperVersion = formData.get('paperVersion');
     const paperApiVersion = paperVersion.split('-')[0];
 
+    const sourceLang = formData.get('sourceLang') || 'kotlin';
     const vars = {
       PROJECT_NAME: projectName,
       PROJECT_NAME_CAMEL: toCamelCase(projectName.replace(/-/g, ' ')),
@@ -209,6 +245,9 @@ export function initApp() {
       KOTLIN_VERSION: formData.get('kotlinVersion'),
       PAPER_VERSION: paperVersion,
       PAPER_API_VERSION: paperApiVersion,
+      SOURCE_LANG: sourceLang,
+      SOURCE_KOTLIN: sourceLang === 'kotlin' ? 'true' : 'false',
+      SOURCE_JAVA: sourceLang === 'java' ? 'true' : 'false',
       GITHUB_PUBLISH: formData.get('githubPublish') ? 'true' : 'false',
       GITHUB_OWNER: formData.get('githubOwner') || 'github',
     };
