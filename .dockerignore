@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build output (will be built in Docker)
+web/.next/
+web/out/
+*.local
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Git
+.git/
+.gitignore
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+.cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Documentation (not needed in Docker)
+*.md
+!README.md
+
+# Docker files (not needed inside container)
+deploy/
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Other config files not needed in container
+deploy/setup-server.sh
+
+# Gradle build outputs (template folder)
+**/.gradle/
+**/build/

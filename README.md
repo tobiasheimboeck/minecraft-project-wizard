@@ -44,4 +44,22 @@ npm run build
 npm run start
 ```
 
-Deploy to Vercel, Node.js host, or any platform supporting Next.js.
+## Docker Deployment (wie HyLib-webui)
+
+### GitHub Actions (CI/CD)
+
+- Push auf `production`-Branch → automatischer Build & Push nach `ghcr.io`
+- Image: `ghcr.io/<owner>/minecraft-projekt-wirard:latest`
+
+### Server-Setup
+
+```bash
+cd deploy
+./setup-server.sh
+# .env anpassen falls nötig (DOMAIN)
+docker compose up -d
+```
+
+Oder manuell: `docker-compose.yml` und `Caddyfile` aus `deploy/` kopieren, `.env` mit `DOMAIN=wizard.developertobi.net` anlegen, dann `docker compose up -d`.
+
+**Voraussetzung:** DNS für die Domain muss auf die Server-IP zeigen. Caddy holt automatisch ein Let's-Encrypt-Zertifikat.
