@@ -10,6 +10,9 @@ pnpm-debug.log*
 dist/
 *.local
 
+# Next.js
+.next/
+
 # Gradle
 .gradle/
 build/

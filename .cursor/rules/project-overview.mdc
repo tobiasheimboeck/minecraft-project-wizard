@@ -1,0 +1,33 @@
+---
+description: Project overview and core architecture
+alwaysApply: true
+---
+
+# Minecraft Project Wizard – Project Overview
+
+## Project Type
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui (radix-nova style)
+
+## Project Structure
+- **Web App**: [web/](mdc:web/) – Next.js wizard
+- **Template**: [template/](mdc:template/) – Gradle project templates (single/multi)
+- **App Directory**: [web/src/app/](mdc:web/src/app/) – Next.js App Router
+- **Components**: [web/src/components/](mdc:web/src/components/) – Reusable components
+- **Wizard**: [web/src/components/wizard/](mdc:web/src/components/wizard/) – Main wizard form
+- **Lib**: [web/src/lib/](mdc:web/src/lib/) – Utilities, templates, wizard logic
+
+## Key Technologies
+- Next.js with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- shadcn/ui (Radix UI + Tailwind)
+- JSZip for client-side ZIP generation
+- Lucide React for icons
+
+## Design Reference
+- **Theme**: KMP JetBrains style (kmp.jetbrains.com) – dark theme, Kotlin purple (#7f52ff)
+- **Font**: JetBrains Mono
+- **Colors**: #1e1e1e background, #252526 elevated, #7f52ff primary

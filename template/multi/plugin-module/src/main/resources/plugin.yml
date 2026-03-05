@@ -1,6 +1,12 @@
 name: {{PROJECT_NAME_CAMEL}}
-version: '1.0-SNAPSHOT'
+version: '{{PLUGIN_VERSION}}'
 main: {{GROUP_ID}}.bukkit.{{PROJECT_NAME_CAMEL}}Plugin
 api-version: "{{PAPER_API_VERSION}}"
 authors:
-  - YourName
+{{PLUGIN_AUTHORS_YAML}}
+{{#PLUGIN_HAS_DESCRIPTION}}
+description: {{PLUGIN_DESCRIPTION}}
+{{/PLUGIN_HAS_DESCRIPTION}}
+{{#PLUGIN_HAS_WEBSITE}}
+website: {{PLUGIN_WEBSITE}}
+{{/PLUGIN_HAS_WEBSITE}}

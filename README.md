@@ -7,19 +7,19 @@ A wizard (similar to [start.spring.io](https://start.spring.io)) to generate Pap
 ## Quick Start
 
 ```bash
-cd wizard
+cd web
 npm install
 npm run dev
 ```
 
-Open http://localhost:5173 and configure your project. Click "Generate ZIP" to download.
+Open http://localhost:3000 and configure your project. Click "Generate" to download the ZIP.
 
 ## Structure
 
 - **template/** – Template files with placeholders
   - `single/` – Single-module project
   - `multi/` – Multi-module project (API + Plugin)
-- **wizard/** – Vite-based web app
+- **web/** – Next.js app (shadcn)
   - Form to configure project
   - Client-side ZIP generation with JSZip
 
@@ -28,7 +28,7 @@ Open http://localhost:5173 and configure your project. Click "Generate ZIP" to d
 After editing files in `template/`, regenerate the embedded templates:
 
 ```bash
-cd wizard
+cd web
 npm run generate-templates
 ```
 
@@ -37,8 +37,9 @@ Or run `npm run dev` / `npm run build` – they run the generator automatically.
 ## Build for Production
 
 ```bash
-cd wizard
+cd web
 npm run build
+npm run start
 ```
 
-Output is in `wizard/dist/`. Deploy to any static host (e.g. GitHub Pages).
+Deploy to Vercel, Node.js host, or any platform supporting Next.js.

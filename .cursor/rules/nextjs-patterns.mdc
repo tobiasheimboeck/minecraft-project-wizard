@@ -1,0 +1,25 @@
+---
+description: Next.js patterns and best practices
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# Next.js Patterns
+
+## App Router Structure
+- **Route Organization**: Use [web/src/app/](mdc:web/src/app/) for App Router
+- **Page Components**: Place page components in appropriate route folders
+- **Layout Components**: Use layout.tsx for shared layouts
+- **Loading States**: Implement loading.tsx for loading states
+- **Error Handling**: Use error.tsx for error boundaries
+- **Not Found**: Use not-found.tsx for 404 pages
+
+## Web Folder
+- All Next.js code lives in [web/](mdc:web/)
+- Templates are generated via `npm run generate-templates` (reads from ../template)
+- Build: `npm run build` in web/ – runs generate-templates then next build
+
+## Performance
+- **Client Components**: Use "use client" only where needed (e.g. Wizard with JSZip)
+- **Static Generation**: Prefer static where possible
+- **Code Splitting**: Use dynamic imports for heavy deps
