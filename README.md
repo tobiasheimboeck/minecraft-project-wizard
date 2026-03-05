@@ -4,6 +4,8 @@ A wizard (similar to [start.spring.io](https://start.spring.io)) to generate Min
 
 **GitHub:** [github.com/tobiasheimboeck/minecraft-project-wizard](https://github.com/tobiasheimboeck/minecraft-project-wizard)
 
+![Desktop View](assets/desktop_view.png)
+
 ## Quick Start
 
 ```bash
@@ -13,6 +15,8 @@ npm run dev
 ```
 
 Open http://localhost:3000 and configure your project. Click "Generate" to download the ZIP.
+
+**Production:** [wizard.developertobi.net](https://wizard.developertobi.net)
 
 ## Structure
 

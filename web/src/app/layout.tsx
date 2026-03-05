@@ -9,6 +9,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://wizard.developertobi.net"),
   title: "Minecraft Plugin Generator",
   description:
     "Generate a Minecraft plugin project – Java or Kotlin, single or multi-module",
