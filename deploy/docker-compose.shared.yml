@@ -1,0 +1,30 @@
+# Gemeinsamer Stack: HyMessage WebUI + Minecraft Plugin Wizard
+# Ein Caddy für beide – Port 80/443 nur hier.
+# Vor dem Start: HyMessage-Stack stoppen (docker compose down).
+
+services:
+  webui:
+    image: ghcr.io/tobiasheimboeck/hymessage-webui:${WEBUI_TAG:-latest}
+    restart: unless-stopped
+    pull_policy: always
+
+  web:
+    image: ghcr.io/tobiasheimboeck/minecraft-project-wizard:${WEB_TAG:-latest}
+    restart: unless-stopped
+    pull_policy: always
+
+  caddy:
+    image: caddy:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile.shared:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on:
+      - webui
+      - web
+
+volumes:
+  caddy_data:

@@ -1,0 +1,14 @@
+# Gemeinsame Caddy-Konfiguration für mehrere Dienste
+# Beide Domains müssen per DNS auf diesen Server zeigen.
+
+{
+    email tobiasheimboeck@outlook.com
+}
+
+webui.developertobi.net {
+    reverse_proxy webui:80
+}
+
+wizard.developertobi.net {
+    reverse_proxy web:3000
+}

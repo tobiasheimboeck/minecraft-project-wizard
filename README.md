@@ -62,3 +62,15 @@ docker compose up -d
 Oder manuell: `docker-compose.yml` und `Caddyfile` aus `deploy/` kopieren, `.env` mit `DOMAIN=wizard.developertobi.net` anlegen, dann `docker compose up -d`.
 
 **Voraussetzung:** DNS für die Domain muss auf die Server-IP zeigen. Caddy holt automatisch ein Let's-Encrypt-Zertifikat.
+
+### Gemeinsamer Stack (wenn Port 80 schon belegt)
+
+Wenn HyMessage WebUI oder ein anderer Dienst bereits Port 80/443 nutzt, einen gemeinsamen Caddy verwenden:
+
+```bash
+cd deploy
+# HyMessage-Stack zuerst stoppen
+docker compose -f docker-compose.shared.yml up -d
+```
+
+`Caddyfile.shared` und `docker-compose.shared.yml` betreiben beide Dienste (webui + wizard) hinter einem Caddy.

@@ -27,6 +27,9 @@ COPY --from=builder /app/web/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/web/.next/static ./.next/static
 
+# Sicherstellen, dass server.js vorhanden ist (Build-Fehler sonst)
+RUN test -f server.js || (echo "FEHLER: server.js fehlt in .next/standalone" && exit 1)
+
 USER nextjs
 EXPOSE 3000
 ENV PORT=3000

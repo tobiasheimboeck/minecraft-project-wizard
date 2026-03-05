@@ -17,7 +17,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  # Muss mit docker-compose.yml übereinstimmen (nicht github.repository wegen anderem Repo-Namen)
+  IMAGE_NAME: tobiasheimboeck/minecraft-project-wizard
 
 jobs:
   build-and-push:
