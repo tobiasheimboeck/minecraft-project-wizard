@@ -1,20 +1,25 @@
 # Minecraft Plugin Wizard – Build & run in Docker (Next.js standalone)
-# Stage 1: Build
-FROM node:20-alpine AS builder
-WORKDIR /app
+# Struktur wie NEXALIT: App im Root, damit server.js in .next/standalone/ landet (nicht in .next/standalone/web/)
 
-# Copy package files from web
+# Stage 1: Dependencies
+FROM node:22-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
 COPY web/package.json web/package-lock.json* ./
 RUN npm ci
 
-# Copy full repo (needed for template/ and generate-templates)
-COPY . .
+# Stage 2: Build (App im Root wie NEXALIT – vermeidet verschachteltes server.js in Monorepo-Setup)
+FROM node:22-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY web/ ./
+# template/ für generate-templates (erwartet ../../template von scripts/)
+COPY template/ /template/
 
-WORKDIR /app/web
 RUN npm run build
 
-# Stage 2: Run standalone Next.js server
-FROM node:20-alpine AS runner
+# Stage 3: Run standalone Next.js server
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -23,12 +28,13 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/web/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/web/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
 
-# Sicherstellen, dass server.js vorhanden ist (Build-Fehler sonst)
-RUN test -f server.js || (echo "FEHLER: server.js fehlt in .next/standalone" && exit 1)
+# Standalone ist jetzt bei /app/.next/standalone (nicht /app/web/.next/standalone)
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 EXPOSE 3000
