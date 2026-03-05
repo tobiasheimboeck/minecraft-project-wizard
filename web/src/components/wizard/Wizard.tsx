@@ -361,7 +361,7 @@ export function Wizard() {
                   ADD DEPENDENCIES...
                 </Button>
               </div>
-              <div className="min-h-[60px] border border-border rounded-lg px-4 py-3">
+              <div className="min-h-[60px] border border-border px-4 py-3">
                 {selectedDependencies.size === 0 ? (
                   <p className="text-sm text-muted-foreground italic">
                     No dependency selected
@@ -372,7 +372,7 @@ export function Wizard() {
                       const dep = DEPENDENCIES.find((d) => d.id === id);
                       return dep ? (
                         <li key={id}>
-                          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-[rgba(240,196,90,0.15)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)] rounded">
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 text-xs bg-[rgba(240,196,90,0.15)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)]">
                             {dep.name}
                             <span className="text-muted-foreground/80">
                               ({scope === "provided" ? "Provided" : "Bundled"})

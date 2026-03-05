@@ -105,7 +105,7 @@ export function DependenciesModal({
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative z-10 w-full max-w-2xl max-h-[80vh] flex flex-col bg-card border border-border rounded-lg shadow-xl overflow-hidden">
+      <div className="relative z-10 w-full max-w-2xl max-h-[80vh] flex flex-col bg-card border border-border shadow-xl overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-border">
           <h2
             id="dependencies-title"
@@ -116,7 +116,7 @@ export function DependenciesModal({
           <button
             type="button"
             onClick={onClose}
-            className="text-muted-foreground hover:text-foreground p-1 rounded transition-colors"
+            className="text-muted-foreground hover:text-foreground p-1 transition-colors"
             aria-label="Close"
           >
             ✕
@@ -133,7 +133,7 @@ export function DependenciesModal({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Kotlin, SQLite, Database, Exposed, McLib..."
-              className="w-full pl-9 pr-4 py-2.5 text-sm bg-muted/50 border border-border rounded-lg placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[var(--kotlin-purple)] focus:border-transparent"
+              className="w-full pl-9 pr-4 py-2.5 text-sm bg-muted/50 border border-border placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[var(--kotlin-purple)] focus:border-transparent"
               aria-label="Search dependencies"
               autoFocus
             />
@@ -145,7 +145,7 @@ export function DependenciesModal({
                 return dep ? (
                   <span
                     key={id}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-[rgba(240,196,90,0.2)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)] rounded-md"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-[rgba(240,196,90,0.2)] border border-[var(--kotlin-purple)] text-[var(--kotlin-purple)]"
                   >
                     {dep.name}
                     <span className="text-muted-foreground/80 text-[10px]">
@@ -226,7 +226,7 @@ function DependencyItem({
     <li>
       <div
         className={cn(
-          "px-4 py-3 rounded-lg border transition-colors",
+          "px-4 py-3 border transition-colors",
           selected
             ? "border-[var(--kotlin-purple)] bg-[rgba(240,196,90,0.15)]"
             : "border-transparent hover:bg-muted/50 hover:border-border"
@@ -258,7 +258,7 @@ function DependencyItem({
                   onSetScope("provided");
                 }}
                 className={cn(
-                  "px-2 py-1 text-xs rounded transition-colors",
+                  "px-2 py-1 text-xs transition-colors",
                   scope === "provided"
                     ? "bg-[var(--kotlin-purple)] text-white"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted"
@@ -274,7 +274,7 @@ function DependencyItem({
                   onSetScope("bundled");
                 }}
                 className={cn(
-                  "px-2 py-1 text-xs rounded transition-colors",
+                  "px-2 py-1 text-xs transition-colors",
                   scope === "bundled"
                     ? "bg-[var(--kotlin-purple)] text-white"
                     : "bg-muted/50 text-muted-foreground hover:bg-muted"
