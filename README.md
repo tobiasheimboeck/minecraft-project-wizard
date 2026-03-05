@@ -2,8 +2,6 @@
 
 A wizard (similar to [start.spring.io](https://start.spring.io)) to generate Minecraft plugin projects – Paper, Velocity (planned), Java or Kotlin, single or multi-module.
 
-**GitHub:** [github.com/tobiasheimboeck/minecraft-project-wizard](https://github.com/tobiasheimboeck/minecraft-project-wizard)
-
 ![Desktop View](assets/desktop_view.png)
 
 ## Quick Start
