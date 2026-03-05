@@ -219,9 +219,11 @@ export function Wizard() {
   return (
     <div className="flex flex-col min-h-[calc(100vh-4rem)]">
       <header className="mb-10 text-center">
-        <h1 className="text-[1.75rem] font-semibold text-foreground mb-2">
-          Minecraft Plugin Generator
-        </h1>
+        <img
+          src="/banner.png"
+          alt="Minecraft Plugin Generator"
+          className="h-8 md:h-10 mx-auto mb-2 w-auto"
+        />
         <p className="text-muted-foreground text-sm">
           Generate a Minecraft plugin project – Java or Kotlin, single or multi-module
         </p>
